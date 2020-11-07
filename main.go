@@ -5,7 +5,7 @@ import (
 	"os"
 
 	t "github.com/go-telegram-bot-api/telegram-bot-api"
-	c "github.com/lithiferous/succ/coms"
+	c "github.com/lithiferous/go-fundmgr/coms"
 )
 
 func main() {

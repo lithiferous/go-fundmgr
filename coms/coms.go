@@ -7,7 +7,7 @@ import (
 	s "strings"
 
 	ss "github.com/deckarep/golang-set"
-	m "github.com/lithiferous/succ/models"
+	m "github.com/lithiferous/go-fundmgr/models"
 )
 
 func DropCmd(q string, sep string) []string {

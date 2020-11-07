@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	s "github.com/deckarep/golang-set"
-	m "github.com/lithiferous/succ/models"
+	m "github.com/lithiferous/go-fundmgr/models"
 )
 
 func InState(filePath string) (**list.List, *s.Set) {
