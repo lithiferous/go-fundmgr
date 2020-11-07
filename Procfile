@@ -1,1 +1,1 @@
-web: bin/go-succ
+web: bin/go-fundmgr
