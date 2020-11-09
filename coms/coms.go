@@ -66,11 +66,11 @@ func Pay(p []string, sep string, l **ss.Set) string {
 }
 
 func PrintName(str string) string {
-	return strings.Join(strings.Split(str, " ")[0:2], " ")
+	return s.Join(s.Split(str, " ")[0:2], " ")
 }
 
-func Status(set s.Set) string {
-	var str strings.Builder
+func Status(set ss.Set) string {
+	var str s.Builder
 	it := set.Iterator()
 	for el := range it.C {
 		str.WriteString(fmt.Sprintf("%s: %.2f\n", PrintName(el.(*m.Person).Name), el.(*m.Person).Value))
