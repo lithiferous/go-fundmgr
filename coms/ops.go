@@ -107,15 +107,6 @@ func Eval(d m.Delta, l **list.List) string {
 	return fmt.Sprintf("Вычел %.2f галактического кредита для %s", d.Value, ass)
 }
 
-func Status(set s.Set) string {
-	var str strings.Builder
-	it := set.Iterator()
-	for el := range it.C {
-		str.WriteString(fmt.Sprintf("%s: %.2f\n", el.(*m.Person).Name, el.(*m.Person).Value))
-	}
-	return str.String()
-}
-
 func Payer(l **list.List, ss *s.Set, a *m.Person, n string) string {
 	(*l).PushBack(m.Payer{Person: a, Name: n})
 	return fmt.Sprintf("Добавил %s, теперь он платит за %s\n", n, a.Name)

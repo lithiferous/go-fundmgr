@@ -9,5 +9,8 @@ $(DOCKER_CMD): clean
 clean:
 	rm -rf $(DOCKER_BUILD)
 
-heroku: $(DOCKER_CMD)
+build: $(DOCKER_CMD)
 	heroku container:push web
+
+push: $(DOCKER_CMD)
+	heroku container:release web

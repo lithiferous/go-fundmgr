@@ -2,11 +2,16 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"os"
 
 	t "github.com/go-telegram-bot-api/telegram-bot-api"
 	c "github.com/lithiferous/go-fundmgr/coms"
 )
+
+func MainHandler(resp http.ResponseWriter, _ *http.Request) {
+	resp.Write([]byte("Hi there! I'm fundmgr bot!"))
+}
 
 func main() {
 	bot, err := t.NewBotAPI(os.Getenv("TG"))
@@ -18,15 +23,15 @@ func main() {
 
 	log.Printf("Authorized on account %s", bot.Self.UserName)
 
-	u := t.NewUpdate(0)
-	u.Timeout = 60
-
-	ups, err := bot.GetUpdatesChan(u)
+	http.HandleFunc("/", MainHandler)
+	go http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 
 	//init core
 	const sep = " "
 	const fp = "./data"
 	l, s := c.InState(fp)
+
+	ups := fetchUpdates(bot)
 
 	for up := range ups {
 		r := ""
@@ -71,4 +76,13 @@ func main() {
 			bot.Send(msg)
 		}
 	}
+}
+
+func fetchUpdates(bot *t.BotAPI) t.UpdatesChannel {
+	_, err := bot.SetWebhook(t.NewWebhook("https://go-fundmgr.herokuapp.com/" + bot.Token))
+	if err != nil {
+		log.Printf("webhook err - %w ", err)
+	}
+	updates := bot.ListenForWebhook("/" + bot.Token)
+	return updates
 }
